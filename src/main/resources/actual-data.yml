@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    username: BOLK_EXT_BOLK
+    password: 18042EXT08469
+    url: jdbc:postgresql://10.0.1.79:5432/bolk_accept
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
