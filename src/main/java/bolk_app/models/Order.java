@@ -12,10 +12,12 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id; //aantal? (don't know if it is meant as id or number of pallets)
+    private int id;
 
-    @Column(columnDefinition = "ENUM('EWPE', 'EURO', 'EWPB', 'EWPHA', 'DOOS', 'PLTVR')")
-    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "nr_pallets")
+    private int nrPallets;
+
+    @Enumerated(EnumType.STRING)
     private Unit unit;
 
     @Column(columnDefinition = "VARCHAR(255)")
