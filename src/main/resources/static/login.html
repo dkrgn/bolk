@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="icon" href="img/BolkLogo.png">
+</head>
+<body>
+    <main class="flex items-center justify-center h-screen w-full bg-no-repeat bg-cover"
+        style="background-image: url('img/Bolktruck.jpg');">
+        <form>
+            <div class="bg-white w-96 p-6 rounded shadow-sm">
+                <div class="flex items-center justify-center mb-4">
+                    <img src="img/BolkLogo.png" alt="BolkLogo" class="h-32"/>
+                </div>
+                <label class="text-gray-700">Email</label>
+                <input class="w-full py-2 bg-gray-50 text-gray-500 
+                    px-1 outling-none mb-4" 
+                    type="email">
+                <label class="text-gray-700">Password</label>
+                <input class="w-full py-2 bg-gray-50 text-gray-500
+                    px-1 outling-none mb-4"
+                    type="password">
+                <input id="remember"
+                    class="mb-6"
+                    type="checkbox">
+                <label for="remember"
+                    class="text-gray-700">Remember Me</label>
+                <button type="submit"
+                    class="bg-blue-500 w-full text-gray-100 py-2
+                    rounded hover:bg-blue-600 transition-colors">Login</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
