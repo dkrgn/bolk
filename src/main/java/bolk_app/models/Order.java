@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.util.Set;
 
 @Data
 @Entity
@@ -14,37 +16,25 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "nr_pallets")
-    private int nrPallets;
+    @Column(columnDefinition = "DATE")
+    private LocalDate date;
 
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private Unit unit;
+    private Status status;
 
     @Column(columnDefinition = "VARCHAR(255)")
     @NotNull
     private String description;
 
-    @Column(columnDefinition = "NUMERIC")
-    @NotNull
-    private float weight;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id")
+    private Customer customer;
 
-    @Column(columnDefinition = "NUMERIC")
-    @NotNull
-    private float length;
+    @ManyToOne
+    @JoinColumn(name = "recipient_id", nullable = false, referencedColumnName = "id")
+    private Recipient recipient;
 
-    @Column(columnDefinition = "NUMERIC")
-    @NotNull
-    private float width;
-
-    @Column(columnDefinition = "NUMERIC")
-    @NotNull
-    private float height;
-
-    @Column(columnDefinition = "NUMERIC")
-    @NotNull
-    private float lm; //no idea what that is
-}
-
-enum Unit {
-    EWPE, EURO, EWPB, EWPHA, DOOS, PLTVR
+    @OneToMany(mappedBy = "order")
+    private Set<Goods> goodsSet;
 }

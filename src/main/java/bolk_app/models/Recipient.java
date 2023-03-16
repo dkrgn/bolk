@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Data
 @Entity
@@ -46,4 +47,7 @@ public class Recipient {
     @Column(columnDefinition = "DATE",
             name = "date")
     private LocalDate date;
+
+    @OneToMany(mappedBy = "recipient")
+    private Set<Order> orderSet;
 }

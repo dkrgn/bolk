@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Data
 @Entity
@@ -23,7 +24,8 @@ public class Customer {
     @NotNull
     private String street;
 
-    @Column(columnDefinition = "VARCHAR(10)")
+    @Column(columnDefinition = "VARCHAR(10)",
+            name = "house_nr")
     private String houseNr;
 
     @Column(columnDefinition = "VARCHAR(10)")
@@ -46,4 +48,8 @@ public class Customer {
     @Column(columnDefinition = "DATE",
             name = "date")
     private LocalDate date;
+
+    @OneToMany(mappedBy = "customer")
+    private Set<Order> orderSet;
+
 }
