@@ -1,5 +1,7 @@
 package bolk_app.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -43,6 +45,7 @@ public class Goods {
     @Column(columnDefinition = "BOOLEAN")
     private boolean fragile;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id")
     private Order order;

@@ -12,7 +12,7 @@ import java.util.List;
 public interface OrderRepo extends JpaRepository<Order, Integer> {
 
     @Query(value = "SELECT * FROM orders WHERE status = :status", nativeQuery = true)
-    public List<Order> getOrderByStatus(Status status);
+    public List<Order> getOrderByStatus(String status);
 
     @Query(value = "SELECT * FROM orders", nativeQuery = true)
     public List<Order> getAll();

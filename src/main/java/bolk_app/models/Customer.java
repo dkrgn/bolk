@@ -1,5 +1,7 @@
 package bolk_app.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -49,6 +51,7 @@ public class Customer {
             name = "date")
     private LocalDate date;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customer")
     private Set<Order> orderSet;
 
