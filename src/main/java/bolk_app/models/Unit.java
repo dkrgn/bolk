@@ -1,6 +1,5 @@
 package bolk_app.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -9,15 +8,13 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
-@Table(name = "goods")
-public class Goods {
+@Table(name = "units")
+public class Unit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "nr_pallets")
-    private int nrPallets;
 
     @Column(columnDefinition = "NUMERIC")
     @NotNull

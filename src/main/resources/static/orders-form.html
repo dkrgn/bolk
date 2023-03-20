@@ -4,25 +4,27 @@
     <meta charset="UTF-8">
     <title>OrderForm</title>
     <link href="css/style.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="/js/orders-form.js"></script>
 </head>
 <body>
 
 <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
   <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Order information</h5>
-  <div class="grid gap-6 mb-6 md:grid-cols-3">
-    <div>
+  <div id="order-info" class="grid gap-6 mb-6 md:grid-cols-3">
+    <div id="id-order">
       <label for="CustomerId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer ID:</label>
       <p id="CustomerId" class="font-normal text-gray-700 dark:text-gray-400">1345634</p>
     </div>
-    <div>
+    <div id="date-order">
       <label for="OrderId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Order ID:</label>
       <p id="OrderId" class="font-normal text-gray-700 dark:text-gray-400">3232323</p>
     </div>
-    <div>
+    <div id="customer-order">
       <label for="PalletNr" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Number of pallets:</label>
       <p id="PalletNr" class="font-normal text-gray-700 dark:text-gray-400">5</p>
     </div>
-    <div>
+    <div id="status-order">
       <label for="Date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date:</label>
       <p id="Date" class="font-normal text-gray-700 dark:text-gray-400">08/03/2023</p>
     </div>
@@ -39,8 +41,21 @@
   <div>
     <label for="Pallet" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select the pallet type</label>
     <select id="Pallet" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-      <option>Wooden</option>
-      <option>Other</option>
+      <option value="EWPE">
+        EWPE
+      </option>
+      <option value="EURO">
+        EURO
+      </option>
+      <option value="EWPHA">
+        EWPHA
+      </option>
+      <option value="DOOS">
+        DOOS
+      </option>
+      <option value="PLTVR">
+        PLTVR
+      </option>
     </select>
   </div>
 
@@ -58,7 +73,7 @@
       <input type="number" id="Length" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="50cm" required>
     </div>
     <div>
-      <label for="Weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Wheight(kg)</label>
+      <label for="Weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Weight(kg)</label>
       <input type="number" id="Weight" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="120kg" required>
     </div>
     <div class="flex items-start mb-6">

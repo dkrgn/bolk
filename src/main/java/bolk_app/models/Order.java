@@ -1,8 +1,6 @@
 package bolk_app.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -30,6 +28,9 @@ public class Order {
     @NotNull
     private String description;
 
+    @Column(name = "nr_pallets")
+    private int nrPallets;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id")
@@ -42,5 +43,5 @@ public class Order {
 
     @JsonIgnore
     @OneToMany(mappedBy = "order")
-    private Set<Goods> goodsSet;
+    private Set<Unit> unitSet;
 }
