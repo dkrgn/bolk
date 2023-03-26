@@ -14,5 +14,6 @@ public class OrderResponse {
     private LocalDate date;
     private String customerName;
     private Status status;
+    private int palletNr;
 
 }

@@ -15,6 +15,13 @@ public class Unit {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(name = "delivery_company",
+    columnDefinition = "VARCHAR(255)")
+    private String deliveryCompany;
+
+    @Column(name = "type")
+    @Enumerated(EnumType.STRING)
+    private PalletType type;
 
     @Column(columnDefinition = "NUMERIC")
     @NotNull
@@ -31,10 +38,6 @@ public class Unit {
     @Column(columnDefinition = "NUMERIC")
     @NotNull
     private float height;
-
-    @Column(columnDefinition = "NUMERIC")
-    @NotNull
-    private float lm; //no idea what that is
 
     @Column(columnDefinition = "BOOLEAN")
     private boolean sealed;

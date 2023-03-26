@@ -24,6 +24,9 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @Column(name = "artnr", columnDefinition = "VARCHAR(255)")
+    private String artNr;
+
     @Column(columnDefinition = "VARCHAR(255)")
     @NotNull
     private String description;

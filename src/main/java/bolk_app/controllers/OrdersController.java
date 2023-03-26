@@ -28,33 +28,33 @@ public class OrdersController {
     @GetMapping("/all")
     public List<OrderResponse> getAllOrders() {
         List<Order> orders = orderRepo.getAll();
-        return OrderService.getResponse(orders, customerRepo);
+        return OrderService.getResponses(orders, customerRepo);
     }
 
     @GetMapping("/pending")
     public List<OrderResponse> getPendingOrders() {
-        List<Order> pending = orderRepo.getOrderByStatus(Status.PENDING.toString());
-        return OrderService.getResponse(pending, customerRepo);
+        List<Order> pending = orderRepo.getOrdersByStatus(Status.PENDING.toString());
+        return OrderService.getResponses(pending, customerRepo);
     }
 
     @GetMapping("/finished")
     public List<OrderResponse> getFinishedOrders() {
-        List<Order> finished = orderRepo.getOrderByStatus(Status.FINISHED.toString());
-        return OrderService.getResponse(finished, customerRepo);
+        List<Order> finished = orderRepo.getOrdersByStatus(Status.FINISHED.toString());
+        return OrderService.getResponses(finished, customerRepo);
     }
 
     @GetMapping("/search/{id}")
-    public List<OrderResponse> getOrdersBySearch(
+    public OrderResponse getOrdersBySearch(
             @PathVariable("id") String id) {
-        List<Order> orders = orderRepo.getOrderById(Integer.parseInt(id));
-        return OrderService.getResponse(orders, customerRepo);
+        Order order = orderRepo.getOrderById(Integer.parseInt(id));
+        return OrderService.getResponse(order, customerRepo);
     }
 
     @GetMapping("/OrderForm.html/{id}")
-    public List<OrderResponse> getOrderForForm(
+    public OrderResponse getOrderForForm(
             @PathVariable("id") String id) {
-        List<Order> orders = orderRepo.getOrderById(Integer.parseInt(id));
-        return OrderService.getResponse(orders, customerRepo);
+        Order order = orderRepo.getOrderById(Integer.parseInt(id));
+        return OrderService.getResponse(order, customerRepo);
     }
 
 }
