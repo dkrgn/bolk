@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Message>
+  <Message_Header>
+    <Message_Date />
+    <Message_Depot />
+    <Message_Client />
+    <Message_Time />
+  </Message_Header>
+  <Orders>
+    <Order>
+      <Depot_Departure />
+      <Depot_Arrival />
+      <Waybill_NR />
+      <Delivery_Type />
+      <Resource_Code>
+        <RC_accepted />
+        <RC_not_accepted />
+      </Resource_Code>
+      <Bill_Reference />
+      <COD_Amount />
+      <InDelivery_Alert />
+      <InDelivery_Mailaddress />
+      <InDelivery_Mailaddress2 />
+      <InDelivery_Mailaddress3 />
+      <InDelivery_Mailaddress4 />
+      <InDelivery_Mailaddress5 />
+      <InDelivery_Mailaddress6 />
+      <InDelivery_Mailaddress7 />
+      <InDelivery_Mailaddress8 />
+      <InDelivery_Mailaddress9 />
+      <InDelivery_Mailaddress10 />
+      <InDelivery_Sms1 />
+      <InDelivery_Sms2 />
+      <InDelivery_Sms3 />
+      <InDelivery_Sms4 />
+      <InDelivery_Sms5 />
+      <InDelivery_Sms6 />
+      <InDelivery_Sms7 />
+      <InDelivery_Sms8 />
+      <InDelivery_Sms9 />
+      <InDelivery_Sms10 />
+      <PickupAddress>
+        <Code />
+        <Name />
+        <Name2 />
+        <Street />
+        <Nr />
+        <NrAddition />
+        <PU_address_extra />
+        <ZipCode />
+        <City />
+        <Country />
+        <Phone />
+        <X_Coordinate />
+        <Y_Coordinate />
+        <Validate />
+        <TimeOpen />
+        <Date />
+        <Time />
+        <Loading_Reference />
+        <Time_Frame_loading>
+          <FromTime_1 />
+          <UntilTime_1 />
+          <FromTime_2 />
+          <UntilTime_2 />
+        </Time_Frame_loading>
+      </PickupAddress>
+      <DeliveryAddress>
+        <Code />
+        <Name />
+        <Name2 />
+        <Street />
+        <Nr />
+        <NrAddition />
+        <Del_address_extra />
+        <ZipCode />
+        <City />
+        <Country />
+        <Phone />
+        <X_Coordinate />
+        <Y_Coordinate />
+        <Validate />
+        <TimeOpen />
+        <Preferred_unloading_date />
+        <Date />
+        <Time />
+        <Unloading_Reference />
+        <Time_Frame_unloading>
+          <FromTime_1 />
+          <UntilTime_1 />
+          <FromTime_2 />
+          <UntilTime_2 />
+        </Time_Frame_unloading>
+      </DeliveryAddress>
+      <Neutral />
+      <TOD />
+      <Instructions />
+      <Original_Documents />
+      <Groundplaces />
+      <Goods_Details>
+        <Goods_Detail>
+          <DeliveryNoteNumber />
+          <PackageQuantity />
+          <PackageUnitCode />
+          <PackageUnitDescription />
+          <GoodsDescription />
+          <Goods_Weight />
+          <Goods_Volume />
+          <Goods_LoadMeter />
+          <ShipmentQuantity />
+          <ShipmentUnitCode />
+          <ShipmentUnitDescription />
+          <EmballageQuantity />
+          <EmballageUnitCode />
+          <EmballageUnitDescription />
+          <Collo_Detail>
+            <Barcode />
+            <UnitDescription />
+            <Collo_Length />
+            <Collo_Width />
+            <Collo_Height />
+            <Collo_Weight />
+            <Collo_LoadMeter />
+            <Collo_Pallet />
+            <Collo_PalletUnitCode />
+          </Collo_Detail>
+          <Goods_Dangerous_Goods>
+            <Goods_Dangerous_Good>
+              <DGS_Unique_code />
+              <DGS_technical_name />
+              <DGS_neg />
+              <DGS_UN_nr />
+              <DGS_group />
+              <DGS_class />
+              <DGS_classification />
+              <DGS_etiket />
+              <DGS_tunnelcode />
+              <DGS_category />
+              <DGS_weight />
+              <DGS_multiply_factor />
+              <DGS_points />
+            </Goods_Dangerous_Good>
+          </Goods_Dangerous_Goods>
+        </Goods_Detail>
+      </Goods_Details>
+    </Order>
+  </Orders>
+</Message>

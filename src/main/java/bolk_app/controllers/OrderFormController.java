@@ -9,6 +9,7 @@ import bolk_app.repositories.CustomerRepo;
 import bolk_app.repositories.UnitRepo;
 import bolk_app.repositories.OrderRepo;
 import bolk_app.services.OrderService;
+import bolk_app.services.XMLBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -60,6 +61,7 @@ public class OrderFormController {
             System.out.println(Status.FINISHED.name() + "      " + Integer.parseInt(id));
             orderRepo.changeOrderStatus(Status.FINISHED.name(), Integer.parseInt(id));
         }
+        XMLBuilder.build();
         return unitRepo.getUnitByOrderIdLimited(Integer.parseInt(id), data.getUnits().size());
     }
 
