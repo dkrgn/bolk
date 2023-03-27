@@ -21,7 +21,7 @@ public class Unit {
 
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
-    private PalletType type;
+    private UnitType type;
 
     @Column(columnDefinition = "NUMERIC")
     @NotNull

@@ -1,25 +1,32 @@
 package bolk_app.services;
 
+import bolk_app.models.Order;
+import bolk_app.models.Recipient;
+import bolk_app.models.Unit;
+import bolk_app.repositories.RecipientRepo;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class XMLBuilder {
 
-    public static void build() {
+    public static void build(Order order, List<Unit> units, RecipientRepo recipientRepo) {
         Document doc = new Document();
         Element message = new Element("Message");
         buildMessageHeader(message);
-        buildOrders(message);
+        buildOrders(message, order, units, recipientRepo);
         doc.setRootElement(message);
         XMLOutputter outputter = new XMLOutputter();
         outputter.setFormat(Format.getPrettyFormat());
@@ -33,7 +40,7 @@ public class XMLBuilder {
     public static void buildMessageHeader(Element message) {
         Element header = new Element("Message_Header");
         List<Element> parameters = Arrays.asList(
-                new Element("Message_Date"),
+                new Element("Message_Date").setText(java.time.LocalDate.now().toString()),
                 new Element("Message_Depot"),
                 new Element("Message_Client"),
                 new Element("Message_Time")
@@ -42,186 +49,72 @@ public class XMLBuilder {
         message.addContent(header);
     }
 
-    public static void buildOrders(Element message) {
+    public static void buildOrders(Element message, Order order, List<Unit> units, RecipientRepo recipientRepo) {
         Element orders = new Element("Orders");
-        Element order = new Element("Order");
-        List<Element> orderParameters = Arrays.asList(
-                new Element("Depot_Departure"),
-                new Element("Depot_Arrival"),
-                new Element("Waybill_NR"),
-                new Element("Delivery_Type"),
-                new Element("Resource_Code"),
-                new Element("Bill_Reference"),
-                new Element("COD_Amount"),
-                new Element("InDelivery_Alert"),
-                new Element("InDelivery_Mailaddress"),
-                new Element("InDelivery_Mailaddress2"),
-                new Element("InDelivery_Mailaddress3"),
-                new Element("InDelivery_Mailaddress4"),
-                new Element("InDelivery_Mailaddress5"),
-                new Element("InDelivery_Mailaddress6"),
-                new Element("InDelivery_Mailaddress7"),
-                new Element("InDelivery_Mailaddress8"),
-                new Element("InDelivery_Mailaddress9"),
-                new Element("InDelivery_Mailaddress10"),
-                new Element("InDelivery_Sms1"),
-                new Element("InDelivery_Sms2"),
-                new Element("InDelivery_Sms3"),
-                new Element("InDelivery_Sms4"),
-                new Element("InDelivery_Sms5"),
-                new Element("InDelivery_Sms6"),
-                new Element("InDelivery_Sms7"),
-                new Element("InDelivery_Sms8"),
-                new Element("InDelivery_Sms9"),
-                new Element("InDelivery_Sms10"),
-                new Element("PickupAddress"),
-                new Element("DeliveryAddress"),
-                new Element("Neutral"),
-                new Element("TOD"),
-                new Element("Instructions"),
-                new Element("Original_Documents"),
-                new Element("Groundplaces"),
-                new Element("Goods_Details")
+        Element orderEl = new Element("Order");
+        orderEl.addContent(new Element("PickupAddress"));
+        orderEl.addContent(new Element("DeliveryAddress"));
+        orderEl.addContent(new Element("Goods_Details"));
 
-        );
-        orderParameters.forEach(order::addContent);
+        buildPickupAddress(orderEl.getChild("PickupAddress"));
+        System.err.println(order.getRecipient().getId());
+        buildDeliveryAddress(orderEl.getChild("DeliveryAddress"), recipientRepo, order.getRecipient().getId());
+        buildGoodsDetails(orderEl.getChild("Goods_Details"), units);
 
-        Element resource = order.getChild("Resource_Code");
-        resource.addContent(new Element("RC_accepted"));
-        resource.addContent(new Element("RC_not_accepted"));
-
-        buildPickupAddress(order.getChild("PickupAddress"));
-        buildDeliveryAddress(order.getChild("DeliveryAddress"));
-        buildGoodsDetails(order.getChild("Goods_Details"));
-
-        orders.addContent(order);
+        orders.addContent(orderEl);
         message.addContent(orders);
     }
 
     public static void buildPickupAddress(Element pickupAddress) {
         List<Element> pickupParameters = Arrays.asList(
-                new Element("Code"),
-                new Element("Name"),
-                new Element("Name2"),
-                new Element("Street"),
-                new Element("Nr"),
-                new Element("NrAddition"),
-                new Element("PU_address_extra"),
-                new Element("ZipCode"),
-                new Element("City"),
-                new Element("Country"),
-                new Element("Phone"),
-                new Element("X_Coordinate"),
-                new Element("Y_Coordinate"),
-                new Element("Validate"),
-                new Element("TimeOpen"),
-                new Element("Date"),
-                new Element("Time"),
-                new Element("Loading_Reference"),
-                new Element("Time_Frame_loading")
+                new Element("Name").setText("Bolk Transport B.V."),
+                new Element("Street").setText("Zuidelijke Havenweg"),
+                new Element("Nr").setText("4"),
+                new Element("ZipCode").setText("7554RR"),
+                new Element("City").setText("Hengelo"),
+                new Element("Country").setText("NL"),
+                new Element("Date").setText(java.time.LocalDate.now().toString())
         );
         addToElement(pickupAddress, pickupParameters);
-
-        Element tfl = pickupAddress.getChild("Time_Frame_loading");
-        List<Element> tflParameters = Arrays.asList(
-                new Element("FromTime_1"),
-                new Element("UntilTime_1"),
-                new Element("FromTime_2"),
-                new Element("UntilTime_2")
-        );
-        tflParameters.forEach(tfl::addContent);
     }
 
-    public static void buildDeliveryAddress(Element deliveryAddress) {
+    public static void buildDeliveryAddress(Element deliveryAddress, RecipientRepo recipientRepo, int orderRecipientId) {
+        Recipient recipient = recipientRepo.getRecipientByOrderId(orderRecipientId);
         List<Element> deliveryParameters = Arrays.asList(
-                new Element("Code"),
-                new Element("Name"),
-                new Element("Name2"),
-                new Element("Street"),
-                new Element("Nr"),
-                new Element("NrAddition"),
-                new Element("Del_address_extra"),
-                new Element("ZipCode"),
-                new Element("City"),
-                new Element("Country"),
-                new Element("Phone"),
-                new Element("X_Coordinate"),
-                new Element("Y_Coordinate"),
-                new Element("Validate"),
-                new Element("TimeOpen"),
-                new Element("Preferred_unloading_date"),
-                new Element("Date"),
-                new Element("Time"),
-                new Element("Unloading_Reference"),
-                new Element("Time_Frame_unloading")
+                new Element("Name").setText(recipient.getName()),
+                new Element("Street").setText(recipient.getStreet()),
+                new Element("Nr").setText(recipient.getHouseNr()),
+                new Element("ZipCode").setText(recipient.getZipCode()),
+                new Element("City").setText(recipient.getCity()),
+                new Element("Country").setText(recipient.getCountryCode()),
+                new Element("Date").setText(java.time.LocalDate.now().toString())
         );
         addToElement(deliveryAddress, deliveryParameters);
-
-        Element tfl = deliveryAddress.getChild("Time_Frame_unloading");
-        List<Element> tflParameters = Arrays.asList(
-                new Element("FromTime_1"),
-                new Element("UntilTime_1"),
-                new Element("FromTime_2"),
-                new Element("UntilTime_2")
-        );
-        tflParameters.forEach(tfl::addContent);
     }
 
-    public static void buildGoodsDetails(Element goodsDetails) {
-        Element goodsDetail = new Element("Goods_Detail");
-        List<Element> parameters = Arrays.asList(
-                new Element("DeliveryNoteNumber"),
-                new Element("PackageQuantity"),
-                new Element("PackageUnitCode"),
-                new Element("PackageUnitDescription"),
-                new Element("GoodsDescription"),
-                new Element("Goods_Weight"),
-                new Element("Goods_Volume"),
-                new Element("Goods_LoadMeter"),
-                new Element("ShipmentQuantity"),
-                new Element("ShipmentUnitCode"),
-                new Element("ShipmentUnitDescription"),
-                new Element("EmballageQuantity"),
-                new Element("EmballageUnitCode"),
-                new Element("EmballageUnitDescription"),
-                new Element("Collo_Detail"),
-                new Element("Goods_Dangerous_Goods")
-        );
-        addToElement(goodsDetail, parameters);
-
-        List<Element> collo = Arrays.asList(
-                new Element("Barcode"),
-                new Element("UnitDescription"),
-                new Element("Collo_Length"),
-                new Element("Collo_Width"),
-                new Element("Collo_Height"),
-                new Element("Collo_Weight"),
-                new Element("Collo_LoadMeter"),
-                new Element("Collo_Pallet"),
-                new Element("Collo_PalletUnitCode")
-        );
-        addToElement(goodsDetail.getChild("Collo_Detail"), collo);
-
-        Element goodsDangerousGood = new Element("Goods_Dangerous_Good");
-        List<Element> dangGoodParameters = Arrays.asList(
-                new Element("DGS_Unique_code"),
-                new Element("DGS_technical_name"),
-                new Element("DGS_neg"),
-                new Element("DGS_UN_nr"),
-                new Element("DGS_group"),
-                new Element("DGS_class"),
-                new Element("DGS_classification"),
-                new Element("DGS_etiket"),
-                new Element("DGS_tunnelcode"),
-                new Element("DGS_category"),
-                new Element("DGS_weight"),
-                new Element("DGS_multiply_factor"),
-                new Element("DGS_points")
-        );
-        addToElement(goodsDangerousGood, dangGoodParameters);
-
-        goodsDetail.getChild("Goods_Dangerous_Goods").addContent(goodsDangerousGood);
-        goodsDetails.addContent(goodsDetail);
+    public static void buildGoodsDetails(Element goodsDetails, List<Unit> units) {
+        List<Element> goodsDetailList = new ArrayList<>();
+        for (Unit u : units) {
+            Element goodsDetail = new Element("Goods_Detail");
+            Element packageQuantity = new Element("PackageQuantity").setText("1");
+            Element packageUnitCode = new Element("PackageUnitCode").setText(u.getType().name());
+            Element goodsWeight = new Element("Goods_Weight").setText(String.format("%.2f", u.getWeight()));
+            Element collo = new Element("Collo_Detail");
+            List<Element> colloParams = Arrays.asList(
+                    new Element("Collo_Length").setText(Integer.toString(Math.round(u.getLength()))),
+                    new Element("Collo_Width").setText(Integer.toString(Math.round(u.getWidth()))),
+                    new Element("Collo_Height").setText(Integer.toString(Math.round(u.getHeight()))),
+                    new Element("Collo_Weight").setText(String.format("%.2f", u.getWeight())),
+                    new Element("Collo_PalletUnitCode").setText(u.getType().name())
+            );
+            addToElement(collo, colloParams);
+            goodsDetail.addContent(packageQuantity);
+            goodsDetail.addContent(packageUnitCode);
+            goodsDetail.addContent(goodsWeight);
+            goodsDetail.addContent(collo);
+            goodsDetailList.add(goodsDetail);
+        }
+        addToElement(goodsDetails, goodsDetailList);
     }
 
     public static void addToElement(Element e, List<Element> li) {

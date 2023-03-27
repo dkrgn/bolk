@@ -1,5 +1,5 @@
 package bolk_app.models;
 
-public enum PalletType {
+public enum UnitType {
     EWPE, EURO, EWPB, EWPHA, DOOS, PLTVR
 }
