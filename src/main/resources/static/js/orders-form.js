@@ -13,7 +13,7 @@ $(function() {
     })
 
     $('#previous-page').on('click', function() {
-        window.location.replace("http://localhost:8080/");
+        window.location.href = "http://localhost:8080/";
         localStorage.clear();
     })
 
@@ -117,7 +117,8 @@ $(function() {
         }
         unitsSet = JSON.stringify({'units' : unitsSet});
         postData(unitsSet);
-        $('.submit-form-div').css("display", "none");
+        alert("Data was successfully saved!");
+        window.location.href = "http://localhost:8080/";
         return false;
     });
 

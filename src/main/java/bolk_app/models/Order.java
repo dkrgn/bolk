@@ -2,15 +2,18 @@ package bolk_app.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "orders") //goederenregel
+@Table(name = "orders")
 public class Order {
 
     @Id
@@ -24,7 +27,9 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @Column(name = "artnr", columnDefinition = "VARCHAR(255)")
+    @Column(
+            name = "artnr",
+            columnDefinition = "VARCHAR(255)")
     private String artNr;
 
     @Column(columnDefinition = "VARCHAR(255)")
@@ -36,15 +41,24 @@ public class Order {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(
+            name = "customer_id",
+            nullable = false,
+            referencedColumnName = "id")
     private Customer customer;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "recipient_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(
+            name = "recipient_id",
+            nullable = false,
+            referencedColumnName = "id")
     private Recipient recipient;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "order")
+    @OneToMany(
+            mappedBy = "order",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private Set<Unit> unitSet;
 }

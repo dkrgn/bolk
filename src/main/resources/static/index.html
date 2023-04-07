@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>List of Orders</title>
-    <link href="css/style.css" rel="stylesheet">
-    <link rel="icon" href="img/BolkLogo.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="/img/BolkLogo.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="/js/orders-list.js"></script>
+    <script type="text/javascript" src="/js/orders-list.js"></script>
 </head>
 <body>
 <ul
+        id="list-header"
         class="mb-5 flex list-none flex-col flex-wrap border-b-0 pl-0 md:flex-row"
         role="tablist"
-        data-te-nav-ref>
+        data-te-nav-ref
+        >
     <li role="presentation">
         <a
                 href="#tabs-pending"
@@ -52,6 +54,44 @@
         >Finished</a
         >
     </li>
+    <li id="login-li">
+        <p
+                style="cursor: pointer"
+                class="my-2 block border-x-0 border-t-0 border-b-2 border-transparent px-7 pt-4 pb-3.5 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+                data-te-toggle="pill"
+                data-te-target="#tabs-finished"
+                role="tab"
+                aria-controls="tabs-finished"
+                aria-selected="false"
+                id="login-p">
+            Login
+        </p>
+    </li>
+    <li id="register-li" hidden="hidden">
+        <p
+                style="cursor: pointer"
+                class="my-2 block border-x-0 border-t-0 border-b-2 border-transparent px-7 pt-4 pb-3.5 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+                data-te-toggle="pill"
+                data-te-target="#tabs-all"
+                role="tab"
+                aria-controls="tabs-all"
+                aria-selected="false"
+                id="register-p"
+        >Register</p
+        >
+    </li>
+    <li id="logout-li" hidden="hidden">
+        <p style="cursor: pointer"
+           class="my-2 block border-x-0 border-t-0 border-b-2 border-transparent px-7 pt-4 pb-3.5 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+           data-te-toggle="pill"
+           data-te-target="#tabs-finished"
+           role="tab"
+           aria-controls="tabs-finished"
+           aria-selected="false"
+           id="logout-p">
+            Logout
+        </p>
+    </li>
 </ul>
 <div class="mb-6">
     <div
@@ -74,7 +114,7 @@
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
+                <tr class="header">
                     <th scope="col" class="px-6 py-3">
                         Order ID
                     </th>
@@ -89,6 +129,9 @@
                     </th>
                     <th scope="col" class="px-6 py-3">
                         View
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Delete
                     </th>
                 </tr>
                 </thead>

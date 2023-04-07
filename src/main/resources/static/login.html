@@ -7,11 +7,11 @@
     <title>Login</title>
     <link href="css/style.css" rel="stylesheet">
     <link rel="icon" href="img/BolkLogo.png">
-    <script src="js/login.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
 </head>
-<body>
-    <main class="flex items-center justify-center h-screen w-full bg-no-repeat bg-cover"
-        style="background-image: url('img/Bolktruck.jpg');">
+<body id="login-body">
+    <main class="flex items-center justify-center h-screen w-full bg-no-repeat bg-cover">
         <form>
             <div class="bg-white w-96 p-6 rounded shadow-sm">
                 <div class="flex items-center justify-center mb-4">
@@ -25,14 +25,14 @@
                 <input id="password" class="w-full py-2 bg-gray-50 text-gray-500
                     px-1 outling-none mb-4"
                     type="password">
-                <input id="remember"
-                    class="mb-6"
-                    type="checkbox">
-                <label for="remember"
-                    class="text-gray-700">Remember Me</label>
-                <button type="submit"
+<!--                <input id="remember"-->
+<!--                    class="mb-6"-->
+<!--                    type="checkbox">-->
+<!--                <label for="remember"-->
+<!--                    class="text-gray-700">Remember Me</label>-->
+                <button type="submit" id="login-button"
                     class="bg-blue-500 w-full text-gray-100 py-2
-                    rounded hover:bg-blue-600 transition-colors" onclick="validate()">Login</button>
+                    rounded hover:bg-blue-600 transition-colors">Login</button>
             </div>
         </form>
     </main>

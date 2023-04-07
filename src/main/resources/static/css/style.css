@@ -557,6 +557,19 @@ video {
   padding: 10px 20px;
 }
 
+#login-p {
+  color: blue;
+}
+
+#logout-p {
+  color: blue;
+}
+
+#login-body {
+  background: url("../img/Bolktruck.jpg");
+  width: 100%
+}
+
 .absolute {
   position: absolute;
 }

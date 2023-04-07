@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface CustomerRepo extends JpaRepository<Customer, Integer> {
 
     @Query(value = "SELECT name FROM customers WHERE id = :id", nativeQuery = true)
-    public String getNameByOrderId(int id);
+    String getNameByOrderId(int id);
 }

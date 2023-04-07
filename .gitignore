@@ -37,3 +37,6 @@ build/
 ### Mac OS ###
 .DS_Store
 /bin/
+
+### XML Order Config ###
+src/main/resources/xml-order-config/**

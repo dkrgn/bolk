@@ -1,7 +1,6 @@
 package bolk_app.repositories;
 
 import bolk_app.models.Order;
-import bolk_app.models.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

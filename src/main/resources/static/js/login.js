@@ -1,22 +1,35 @@
-function validate() {
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
+$(function() {
 
-    if(email == "admin" && password == "admin") {
-        alert("login succesfully");
+    $("#login-button").on('click', function() {
+        let email = $("#email").val();
+        let password = $("#password").val();
+        validate(email, password);
         return false;
-    } else {
-        alert("login failed");
-        return false;
-    }
+    });
 
-    /*
-    for(i = 0; i < obj.length; i++) {
-        if(email == obj[i].email && password == obj[i].password) {
-            alert("login succesfully");
-            return;
+    let validate = function(email, password) {
+        if (email.length > 0 && password > password.length) {
+            let req = {'email' : email, 'password' : password};
+            $.ajax({
+                "type": 'POST',
+                "contentType": 'application/json; charset=UTF-8',
+                "url": 'login.html/check',
+                "data": JSON.stringify(req),
+                "dataType":'json',
+                "cache" : false,
+                "processData" : false,
+                "success": function(response) {
+                    console.log(response);
+                    let token = response.token;
+                    let role = response.role;
+                    sessionStorage.setItem("token", token);
+                    sessionStorage.setItem("role", role);
+                    window.location.href = "http://localhost:8080/";
+                },
+                "error": function(jqXHR, status, err) {
+                    alert("Error with login");
+                }
+            });
         }
     }
-    alert("login failed");
-    */
-}
+});
