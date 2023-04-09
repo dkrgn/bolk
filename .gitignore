@@ -40,3 +40,5 @@ build/
 
 ### XML Order Config ###
 src/main/resources/xml-order-config/**
+
+src/main/resources/data.sql

@@ -547,6 +547,16 @@ video {
   padding: 10px 20px;
 }
 
+#p-page {
+  color: white;
+  background-color: rgb(29 78 216);
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 10px 20px;
+}
+
 #previous-page {
   color: white;
   background-color: rgb(29 78 216);

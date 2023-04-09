@@ -7,7 +7,6 @@ import bolk_app.reg_login.token.ConfirmationToken;
 import bolk_app.reg_login.token.ConfirmationTokenService;
 import bolk_app.repositories.CustomerRepo;
 import bolk_app.repositories.OrderRepo;
-import bolk_app.repositories.UnitRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

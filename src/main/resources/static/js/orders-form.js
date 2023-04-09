@@ -6,15 +6,30 @@ $(function() {
     let units = [];
 
     $(document).ready(function() {
-        validate();
-        $.get("/orders-form.html/" + id, {}, function(response) {
-            setOrder(response);
-        })
-    })
+        if (checkIfLoggedIn()) {
+            validate();
+            $.get("/orders-form.html/" + id, {}, function(response) {
+                setOrder(response);
+            })
+        } else {
+            alert("Your session is either expired or you're not logged in");
+            window.location.href = "/login.html";
+        }
+    });
+
+    let checkIfLoggedIn = function() {
+        return sessionStorage.getItem("token") !== null;
+    }
+
 
     $('#previous-page').on('click', function() {
-        window.location.href = "http://localhost:8080/";
-        localStorage.clear();
+        if (checkIfLoggedIn()) {
+            window.location.href = "http://localhost:8080/";
+            localStorage.clear();
+        } else {
+            alert("Your session is either expired or you're not logged in");
+            window.location.href = "/login.html";
+        }
     })
 
     let setOrder = function(response) {
@@ -77,13 +92,18 @@ $(function() {
     }
 
     $('.next-unit').on('click', function() {
-        if (submitted <= palletsNr) {
-            submitted++;
-            units.push(JSON.stringify(getData()));
-            localStorage.setItem("submitted", submitted);
-            localStorage.setItem(submitted + "unit", JSON.stringify(units));
-            $("#submitted").textContent = localStorage.getItem("submitted") + "/" + palletsNr;
-            erase();
+        if (checkIfLoggedIn()) {
+            if (submitted <= palletsNr) {
+                submitted++;
+                units.push(JSON.stringify(getData()));
+                localStorage.setItem("submitted", submitted);
+                localStorage.setItem(submitted + "unit", JSON.stringify(units));
+                $("#submitted").textContent = localStorage.getItem("submitted") + "/" + palletsNr;
+                erase();
+            }
+        } else {
+            alert("Your session is either expired or you're not logged in");
+            window.location.href = "/login.html";
         }
     })
 
@@ -111,15 +131,20 @@ $(function() {
     }
 
     $('#submit-form').on('click', function() {
-        let unitsSet = [];
-        for (let i = 1; i <= submitted; i++) {
-            unitsSet.push(JSON.parse(JSON.parse(localStorage.getItem(i + "unit"))));
+        if (checkIfLoggedIn()) {
+            let unitsSet = [];
+            for (let i = 1; i <= submitted; i++) {
+                unitsSet.push(JSON.parse(JSON.parse(localStorage.getItem(i + "unit"))));
+            }
+            unitsSet = JSON.stringify({'units' : unitsSet});
+            postData(unitsSet);
+            alert("Data was successfully saved!");
+            window.location.href = "http://localhost:8080/";
+            return false;
+        } else {
+            alert("Your session is either expired or you're not logged in");
+            window.location.href = "/login.html";
         }
-        unitsSet = JSON.stringify({'units' : unitsSet});
-        postData(unitsSet);
-        alert("Data was successfully saved!");
-        window.location.href = "http://localhost:8080/";
-        return false;
     });
 
     let postData = function(data) {

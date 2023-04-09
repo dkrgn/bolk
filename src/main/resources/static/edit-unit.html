@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Unit</title>
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="js/edit-unit.js"></script>
+</head>
+<body>
+<h2 id="unit-id"></h2>
+<br>
+<form novalidate>
+    <div id="form">
+        <div id="del-com">
+            <p id="cur-del-com" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></p>
+            <label for="shipping" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Update shipping company</label>
+            <select id="shipping" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="default" selected="selected">No chosen</option>
+                <option value="Tielbeke">Tielbeke</option>
+            </select>
+        </div>
+        <br>
+        <div id="type">
+            <p id="cur-type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></p>
+            <label for="pallet" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Update pallet type</label>
+            <select id="pallet" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="default" selected="selected">
+                    No chosen
+                </option>
+                <option value="EWPE">
+                    EWPE
+                </option>
+                <option value="EURO">
+                    EURO
+                </option>
+                <option value="EWPHA">
+                    EWPHA
+                </option>
+                <option value="DOOS">
+                    DOOS
+                </option>
+                <option value="PLTVR">
+                    PLTVR
+                </option>
+            </select>
+        </div>
+        <br>
+        <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div id="height-div">
+                <p id="cur-height" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></p>
+                <label for="height" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Height(cm)</label>
+                <input type="number" id="height" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="120cm" required>
+            </div>
+            <br>
+            <div id="length-div">
+                <p id="cur-length" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></p>
+                <label for="width" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Width(cm)</label>
+                <input type="number" id="width" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="140cm" required>
+            </div>
+            <br>
+            <div id="width-div">
+                <p id="cur-width" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></p>
+                <label for="length" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Length(cm)</label>
+                <input type="number" id="length" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="50cm" required>
+            </div>
+            <br>
+            <div id="weight-div">
+                <p id="cur-weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></p>
+                <label for="weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Weight(kg)</label>
+                <input type="number" id="weight" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="120kg" required>
+            </div>
+            <br>
+            <div class="flex items-start mb-6" id="fragile-div">
+                <p id="cur-fragile" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"></p>
+                <br>
+                <label for="sealed" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Change:</label>
+                <input id="sealed" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800">
+            </div>
+            <div class="flex items-start mb-6" id="sealed-div">
+                <p id="cur-sealed" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"></p>
+                <br>
+                <label for="fragile" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Change:</label>
+                <input id="fragile" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800">
+            </div>
+        </div>
+    </div>
+    <div class="submit-form-div">
+        <button id="submit-form" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+    </div>
+</form>
+<br>
+<button type="submit" id="p-page">Previous Page</button>
+</body>
+</html>

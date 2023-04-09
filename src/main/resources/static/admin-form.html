@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unit List</title>
+  <link href="css/style.css" rel="stylesheet">
+  <link rel="icon" href="img/BolkLogo.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="js/admin-form.js"></script>
+</head>
+<body>
+
+
+<a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Order information</h5>
+  <div id="order-info" class="grid gap-6 mb-6 md:grid-cols-3">
+    <div id="customer-id-div">
+      <label for="customer-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Name:</label>
+      <!--      <p id="customer-id" class="font-normal text-gray-700 dark:text-gray-400">1345634</p>-->
+    </div>
+    <div id="order-id-div">
+      <label for="order-id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Order ID:</label>
+      <!--      <p id="order-id" class="font-normal text-gray-700 dark:text-gray-400">3232323</p>-->
+    </div>
+    <div id="pallets-nr-div">
+      <label for="pallet-nr" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Number of pallets:</label>
+      <!--      <p id="pallet-nr" class="font-normal text-gray-700 dark:text-gray-400">5</p>-->
+    </div>
+    <div id="date-order-div">
+      <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date:</label>
+      <!--      <p id="date" class="font-normal text-gray-700 dark:text-gray-400">08/03/2023</p>-->
+    </div>
+  </div>
+</a>
+<br>
+<button type="submit" id="previous-page">Previous Page</button>
+<br>
+<br>
+<div id="units-list">
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <tr class="header">
+      <th scope="col" class="px-6 py-3">
+        Unit ID
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Delivery Company
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Type
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Height
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Length
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Width
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Weight
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Sealed
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Fragile
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Edit
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Delete
+      </th>
+    </tr>
+    </thead>
+    <tbody class="units">
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

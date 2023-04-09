@@ -1,20 +1,29 @@
 $(function() {
 
     $('#register-button').on('click', function() {
-        let name = $('#name').val();
-        let email = $('#email').val();
-        let password = $('#password').val();
-        let confirm = $('#confirm-password').val();
+        if (checkIfLoggedIn()) {
+            let name = $('#name').val();
+            let email = $('#email').val();
+            let password = $('#password').val();
+            let confirm = $('#confirm-password').val();
 
-        let req = {"name" : name, "email" : email, "password" : password};
-        let json = JSON.stringify(req);
-        if (password !== confirm) {
-            alert("Passwords are not the same");
-            location.reload();
+            let req = {"name" : name, "email" : email, "password" : password};
+            let json = JSON.stringify(req);
+            if (password !== confirm) {
+                alert("Passwords are not the same");
+                location.reload();
+            }
+            register(json);
+        } else {
+            alert("Your session is either expired or you're not logged in");
+            window.location.href = "/login.html";
         }
-        register(json);
         return false;
     });
+
+    let checkIfLoggedIn = function() {
+        return sessionStorage.getItem("token") !== null;
+    }
 
     let register = function(json) {
         $.ajax({

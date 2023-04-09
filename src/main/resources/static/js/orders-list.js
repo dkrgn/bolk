@@ -49,16 +49,18 @@ $(function() {
     };
 
     let checkRoles = function(trow, response) {
+        //edit
         if (response.status === 'FINISHED' && sessionStorage.getItem("role") === 'EMPLOYEE') {
             trow.append($("<td class=\"px-6 py-4\">" +
                 "<button id='edit-id-" + response.id + "' disabled='disabled' style='color : gray' type='submit' class='edit-button'>Edit</button></td>"));
         } else {
             trow.append($("<td class=\"px-6 py-4\">" +
-                "<button id='edit-id-" + response.id + "' type='submit' class='edit-button'>Edit</button></td>"));
+                "<button id='edit-id-" + response.id + "' type='submit' value='" + response.status + "' class='edit-button'>Edit</button></td>"));
         }
+        //delete
         if (sessionStorage.getItem("role") === 'ADMIN') {
             trow.append($("<td class=\"px-6 py-4\">" +
-                "<button id='edit-id-" + response.id + "' type='submit' style='color: red' class='delete-button'>Delete</button></td>"));
+                "<button id='delete-id-" + response.id + "' type='submit' style='color: red' class='delete-button'>Delete</button></td>"));
         } else {
             trow.append($("<td class=\"px-6 py-4\">" +
                 "<button disabled='disabled' type='submit' style='color: gray'>Delete</button></td>"));
@@ -105,14 +107,19 @@ $(function() {
     $('tbody')
         .on('click', '.edit-button',  function() {
         let stringId = this.id;
-        let id = stringId.substring(stringId.length - 1);
+        let id = stringId.substring("edit-id-".length);
+        let status = this.value;
         localStorage.setItem("id", id);
         console.log(id);
-        window.location.href = "/orders-form.html";
+        if (sessionStorage.getItem("role") === 'ADMIN' && status === 'FINISHED') {
+            window.location.href = "/admin-form.html";
+        } else {
+            window.location.href = "/orders-form.html";
+        }
     })
         .on('click', '.delete-button',  function() {
         let stringId = this.id;
-        let id = stringId.substring(stringId.length - 1);
+        let id = stringId.substring("delete-id-".length);
         let result = confirm("Are you sure you want to delete order #" + id);
         if (result) {
             $.ajax({
