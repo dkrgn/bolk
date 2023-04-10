@@ -20,6 +20,17 @@ $(function() {
         return sessionStorage.getItem("token") !== null;
     }
 
+    setInterval(function() {
+        $.get('/check', {"token" : sessionStorage.getItem("token")}, function(res) {
+            if (res === false) {
+                sessionStorage.clear();
+                alert("Your session is either expired or you're not logged in");
+                window.location.href = "/login.html";
+            }
+        });
+    }, 1000 * 60 * 60);
+
+
     $('#previous-page').on('click', function() {
         if (checkIfLoggedIn()) {
             window.location.href = "http://localhost:8080/";

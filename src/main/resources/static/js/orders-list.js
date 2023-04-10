@@ -26,7 +26,7 @@ $(function() {
                 window.location.href = "/login.html";
             }
         });
-    }, 1000 * 60);
+    }, 1000 * 60 * 60);
 
     let checkIfLoggedIn = function() {
         return sessionStorage.getItem("token") !== null;

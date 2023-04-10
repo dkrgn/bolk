@@ -21,6 +21,15 @@ $(function() {
         return false;
     });
 
+    $('#previous-page').on('click', function() {
+        if (checkIfLoggedIn()) {
+            window.location.href = "http://localhost:8080/";
+        } else {
+            alert("Your session is either expired or you're not logged in");
+            window.location.href = "/login.html";
+        }
+    });
+
     let checkIfLoggedIn = function() {
         return sessionStorage.getItem("token") !== null;
     }
