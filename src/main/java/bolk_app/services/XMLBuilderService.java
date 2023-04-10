@@ -37,7 +37,7 @@ public class XMLBuilderService {
         XMLOutputter outputter = new XMLOutputter();
         outputter.setFormat(Format.getPrettyFormat());
         try {
-            outputter.output(doc, new FileWriter(new File("src/main/resources/xml-order-config/order-" + order.getId() + ".xml")));
+            outputter.output(doc, new FileWriter(new File("src/main/resources/file-outputs/xml-order-config/order-xml-" + order.getId() + ".xml")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -186,10 +186,14 @@ public class XMLBuilderService {
         for (Unit u : units) {
             Element collo = new Element("Collo_Detail");
             List<Element> colloParams = Arrays.asList(
+                    new Element("Barcode"),
+                    new Element("UnitDescription"),
                     new Element("Collo_Length").setText(Integer.toString(Math.round(u.getLength()))),
                     new Element("Collo_Width").setText(Integer.toString(Math.round(u.getWidth()))),
                     new Element("Collo_Height").setText(Integer.toString(Math.round(u.getHeight()))),
                     new Element("Collo_Weight").setText(String.format("%.2f", u.getWeight())),
+                    new Element("Collo_LoadMeter"),
+                    new Element("Collo_Pallet"),
                     new Element("Collo_PalletUnitCode").setText(u.getType().name())
             );
             addToElement(collo, colloParams);

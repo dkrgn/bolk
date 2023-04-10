@@ -39,6 +39,6 @@ build/
 /bin/
 
 ### XML Order Config ###
-src/main/resources/xml-order-config/**
+src/main/resources/file-outputs/**
 
 src/main/resources/data.sql

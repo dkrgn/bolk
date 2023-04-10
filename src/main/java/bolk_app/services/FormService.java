@@ -5,13 +5,14 @@ import bolk_app.models.Status;
 import bolk_app.models.Unit;
 import bolk_app.repositories.OrderRepo;
 import bolk_app.repositories.UnitRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class FormService {
 
     private final OrderRepo orderRepo;
@@ -20,12 +21,7 @@ public class FormService {
 
     private final XMLBuilderService xmlBuilderService;
 
-    @Autowired
-    public FormService(OrderRepo orderRepo, UnitRepo unitRepo, XMLBuilderService xmlBuilderService) {
-        this.orderRepo = orderRepo;
-        this.unitRepo = unitRepo;
-        this.xmlBuilderService = xmlBuilderService;
-    }
+    private final JSONBuilderService jsonBuilderService;
 
     public List<Unit> saveUnitAndReturnResults(int id, UnitWrapper data) {
         List<Unit> units = new ArrayList<>();
@@ -45,6 +41,7 @@ public class FormService {
             orderRepo.changeOrderStatus(Status.FINISHED.name(), id);
         }
         xmlBuilderService.build(orderRepo.getOrderById(id), units);
+        jsonBuilderService.build(orderRepo.getOrderById(id), units);
         return unitRepo.getUnitByOrderIdLimited(id, data.getUnits().size());
     }
 }
