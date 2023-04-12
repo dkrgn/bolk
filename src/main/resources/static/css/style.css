@@ -529,57 +529,6 @@ video {
   pointer-events: none;
 }
 
-.edit-button {
-  font-weight: 500;
-  --tw-text-opacity: 1;
-  color: rgb(37 99 235 / var(--tw-text-opacity));
-  /*color: rgb(59 130 246 / var(--tw-text-opacity));*/
-  text-decoration-line: underline;
-}
-
-.next-unit {
-  color: white;
-  background-color: green;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  padding: 10px 20px;
-}
-
-#p-page {
-  color: white;
-  background-color: rgb(29 78 216);
-  border-radius: 0.5rem;
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  padding: 10px 20px;
-}
-
-#previous-page {
-  color: white;
-  background-color: rgb(29 78 216);
-  border-radius: 0.5rem;
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  padding: 10px 20px;
-}
-
-#login-p {
-  color: blue;
-}
-
-#logout-p {
-  color: blue;
-}
-
-#login-body {
-  background: url("../img/Bolktruck.jpg");
-  width: 100%
-}
-
 .absolute {
   position: absolute;
 }
@@ -613,9 +562,19 @@ video {
   right: 0.625rem;
 }
 
+.mx-8 {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .mb-2 {
@@ -636,6 +595,10 @@ video {
 
 .ml-2 {
   margin-left: 0.5rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
 }
 
 .block {
@@ -937,14 +900,14 @@ video {
   letter-spacing: -0.025em;
 }
 
-.text-blue-600 {
-  --tw-text-opacity: 1;
-  color: rgb(37 99 235 / var(--tw-text-opacity));
-}
-
 .text-gray-100 {
   --tw-text-opacity: 1;
   color: rgb(243 244 246 / var(--tw-text-opacity));
+}
+
+.text-gray-300 {
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity));
 }
 
 .text-gray-500 {
@@ -1046,10 +1009,6 @@ video {
   background-color: rgb(245 245 245 / var(--tw-bg-opacity));
 }
 
-.hover\:underline:hover {
-  text-decoration-line: underline;
-}
-
 .focus\:isolate:focus {
   isolation: isolate;
 }
@@ -1117,11 +1076,6 @@ video {
   .dark\:bg-gray-900 {
     --tw-bg-opacity: 1;
     background-color: rgb(17 24 39 / var(--tw-bg-opacity));
-  }
-
-  .dark\:text-blue-500 {
-    --tw-text-opacity: 1;
-    color: rgb(59 130 246 / var(--tw-text-opacity));
   }
 
   .dark\:text-gray-300 {
