@@ -7,7 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="js/edit-unit.js"></script>
 </head>
-<body>
+<body class="mx-8 my-4">
 <h2 id="unit-id"></h2>
 <br>
 <form novalidate>
@@ -15,35 +15,39 @@
         <div id="del-com">
             <p id="cur-del-com" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></p>
             <label for="shipping" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Update shipping company</label>
-            <select id="shipping" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option value="default" selected="selected">No chosen</option>
-                <option value="Tielbeke">Tielbeke</option>
-            </select>
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
+                <select id="shipping" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="default" selected="selected">No chosen</option>
+                    <option value="Tielbeke">Tielbeke</option>
+                </select>
+            </div>
         </div>
         <br>
         <div id="type">
             <p id="cur-type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></p>
             <label for="pallet" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Update pallet type</label>
-            <select id="pallet" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option value="default" selected="selected">
-                    No chosen
-                </option>
-                <option value="EWPE">
-                    EWPE
-                </option>
-                <option value="EURO">
-                    EURO
-                </option>
-                <option value="EWPHA">
-                    EWPHA
-                </option>
-                <option value="DOOS">
-                    DOOS
-                </option>
-                <option value="PLTVR">
-                    PLTVR
-                </option>
-            </select>
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
+                <select id="pallet" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="default" selected="selected">
+                        No chosen
+                    </option>
+                    <option value="EWPE">
+                        EWPE
+                    </option>
+                    <option value="EURO">
+                        EURO
+                    </option>
+                    <option value="EWPHA">
+                        EWPHA
+                    </option>
+                    <option value="DOOS">
+                        DOOS
+                    </option>
+                    <option value="PLTVR">
+                        PLTVR
+                    </option>
+                </select>
+            </div>
         </div>
         <br>
         <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -74,13 +78,13 @@
             <div class="flex items-start mb-6" id="fragile-div">
                 <p id="cur-fragile" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"></p>
                 <br>
-                <label for="sealed" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Change:</label>
+                <label for="sealed" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Change:&nbsp&nbsp</label>
                 <input id="sealed" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800">
             </div>
             <div class="flex items-start mb-6" id="sealed-div">
                 <p id="cur-sealed" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"></p>
                 <br>
-                <label for="fragile" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Change:</label>
+                <label for="fragile" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Change:&nbsp&nbsp</label>
                 <input id="fragile" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800">
             </div>
         </div>
