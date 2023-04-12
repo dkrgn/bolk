@@ -3,7 +3,6 @@ $(function() {
     let id = localStorage.getItem("id");
     let submitted = 0;
     let palletsNr;
-    let units = [];
 
     $(document).ready(function() {
         if (checkIfLoggedIn()) {
@@ -47,11 +46,8 @@ $(function() {
             submitted = 0;
         } else {
             submitted = localStorage.getItem("submitted");
-        }
-        if (localStorage.getItem("units") === null) {
-            units = [];
-        } else {
-            units = JSON.parse(localStorage.getItem("units"));
+            $("#length").val(localStorage.getItem("length"));
+            $("#width").val(localStorage.getItem("width"));
         }
         if (localStorage.getItem("pallet-nr") === null) {
             palletsNr = 0;
@@ -95,7 +91,13 @@ $(function() {
         if (checkIfLoggedIn()) {
             if (submitted <= palletsNr) {
                 submitted++;
-                units.push(JSON.stringify(getData()));
+                let dataResult = getData();
+                let length = dataResult["length"];
+                let width = dataResult["width"];
+                localStorage.setItem("length", length);
+                localStorage.setItem("width", width);
+                let units = [];
+                units.push(JSON.stringify(dataResult));
                 localStorage.setItem("submitted", submitted);
                 localStorage.setItem(submitted + "unit", JSON.stringify(units));
                 $("#submitted").textContent = localStorage.getItem("submitted") + "/" + palletsNr;
