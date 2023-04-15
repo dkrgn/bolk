@@ -18,6 +18,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Service class to build a XML file with provided Order and Unit data. It saves it to
+ * src/main/resources/file-outputs/xml-order-config/ directory
+ */
 @Service
 public class XMLBuilderService {
 
@@ -28,6 +32,11 @@ public class XMLBuilderService {
         this.recipientRepo = recipientRepo;
     }
 
+    /**
+     * Method to build root elements and call other method
+     * @param order to be written
+     * @param units to be written
+     */
     public void build(Order order, List<Unit> units) {
         Document doc = new Document();
         Element message = new Element("Message");
@@ -43,6 +52,10 @@ public class XMLBuilderService {
         }
     }
 
+    /**
+     * Method build Message Header element
+     * @param message root element
+     */
     public void buildMessageHeader(Element message) {
         Element header = new Element("Message_Header");
         List<Element> parameters = Arrays.asList(
@@ -55,6 +68,12 @@ public class XMLBuilderService {
         message.addContent(header);
     }
 
+    /**
+     * Method to build Order tag elements
+     * @param message root element
+     * @param order to be written
+     * @param units to be written
+     */
     public void buildOrders(Element message, Order order, List<Unit> units) {
         Element orders = new Element("Orders");
         Element orderEl = new Element("Order");
@@ -111,6 +130,10 @@ public class XMLBuilderService {
         message.addContent(orders);
     }
 
+    /**
+     * Method to build pickup address element
+     * @param pickupAddress root element
+     */
     public void buildPickupAddress(Element pickupAddress) {
         List<Element> pickupParameters = Arrays.asList(
                 new Element("Code"),
@@ -145,6 +168,11 @@ public class XMLBuilderService {
         addToElement(tfl, tflParameters);
     }
 
+    /**
+     * Method to build delivery address element
+     * @param deliveryAddress root element
+     * @param orderRecipientId id of Order to be written in file
+     */
     public void buildDeliveryAddress(Element deliveryAddress, int orderRecipientId) {
         Recipient recipient = recipientRepo.getRecipientByOrderId(orderRecipientId);
         List<Element> deliveryParameters = Arrays.asList(
@@ -181,6 +209,11 @@ public class XMLBuilderService {
         addToElement(tfl, tflParameters);
     }
 
+    /**
+     * Method to build Order inner elements
+     * @param goodsDetails root element
+     * @param units to be written
+     */
     public void buildGoodsDetails(Element goodsDetails, List<Unit> units) {
         List<Element> goodsDetailList = new ArrayList<>();
         for (Unit u : units) {
@@ -241,6 +274,11 @@ public class XMLBuilderService {
         addToElement(goodsDetails, goodsDetailList);
     }
 
+    /**
+     * Method to ease adding elements to other elements
+     * @param e elements to add
+     * @param li list where to add elements
+     */
     public void addToElement(Element e, List<Element> li) {
         li.forEach(e::addContent);
     }

@@ -8,17 +8,24 @@ import bolk_app.repositories.UnitRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EnumType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Service class to retrieve Unit objects and update them
+ */
 @Service
 @AllArgsConstructor
 public class UnitService {
 
     private final UnitRepo unitRepo;
 
+    /**
+     * Method to return list of Unit objects by Order id
+     * @param id of Order requested
+     * @return list of Unit response objects
+     */
     public List<UnitResponse> getUnitsByOrderId(int id) {
         List<Unit> units = unitRepo.getUnitsByOrderId(id);
         List<UnitResponse> responses = new ArrayList<>();
@@ -30,12 +37,23 @@ public class UnitService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Method to delete Unit object by its id
+     * @param id requested
+     * @return id of deleted Unit
+     */
     public int deleteUnit(int id) {
         Unit unit = unitRepo.getUnitById(id);
         unitRepo.delete(unit);
         return id;
     }
 
+    /**
+     * Method to update existing Unit object by its id with new provided data
+     * @param id of Unit
+     * @param request: data with which existing Unit should be updated
+     * @return updated Unit
+     */
     public Unit updateUnitById(int id, UnitRequest request) {
         Unit u = unitRepo.getUnitById(id);
         u.setDeliveryCompany(request.getDeliveryCompany());
@@ -50,6 +68,11 @@ public class UnitService {
         return u;
     }
 
+    /**
+     * Method to transform Unit object into DTO Unit response object
+     * @param u: unit to be transformed
+     * @return Unit response object
+     */
     public UnitResponse buildResponse(Unit u) {
         UnitResponse response = new UnitResponse();
         response.setId(u.getId());
@@ -64,6 +87,11 @@ public class UnitService {
         return response;
     }
 
+    /**
+     * Method to get Unit response object by its id
+     * @param id requested
+     * @return Unit response object
+     */
     public UnitResponse getUnitById(int id) {
         Unit u = unitRepo.getUnitById(id);
         return buildResponse(u);

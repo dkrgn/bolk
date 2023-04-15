@@ -10,6 +10,9 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Set;
 
+/**
+ * POJO Recipient object to persist it in database
+ */
 @Getter
 @Setter
 @Entity

@@ -2,6 +2,9 @@ $(function() {
 
     let unit = {};
 
+    /**
+     * Method to call other methods when DOM element is rendered
+     */
     $(document).ready(function() {
         if (checkIfLoggedIn()) {
             $.get("/edit-unit.html/" + localStorage.getItem("unit-id"), {}, function(response) {
@@ -13,10 +16,18 @@ $(function() {
         }
     });
 
+    /**
+     * Method to check if token is stil valid/user still logged in and token has not expired
+     * @returns {boolean}
+     */
     let checkIfLoggedIn = function() {
         return sessionStorage.getItem("token") !== null;
     }
 
+    /**
+     * Method to set data retrieved from backend to DOM elements
+     * @param response
+     */
     let appendDate = function(response) {
         $("#unit-id").text("Unit ID: " + response.id);
         unit["id"] = response.id;
@@ -38,6 +49,9 @@ $(function() {
         unit["sealed"] = response.sealed;
     };
 
+    /**
+     * Method to navigate to specified page on button click
+     */
     $('#p-page').on('click', function() {
         if (checkIfLoggedIn()) {
             window.location.href = "/admin-form.html";
@@ -47,6 +61,10 @@ $(function() {
         }
     });
 
+    /**
+     * Method to retrieve data from input fields
+     * @returns {{sealed: (boolean|*), length: (*|jQuery|string), width: (*|jQuery|string), weight: (*|jQuery|string), fragile: (boolean|*), deliveryCompany: (*|string|jQuery), type: (*|string|jQuery), height: (*|jQuery|string)}}
+     */
     let getData = function() {
         let delivery = $('#shipping').val() === "default" ? unit["deliveryCompany"] : $('#shipping').val();
         let type = $('#pallet').val() === "default" ? unit["type"] : $('#pallet').val();
@@ -86,6 +104,9 @@ $(function() {
         };
     }
 
+    /**
+     * Method to submit data and send it to backend on button click
+     */
     $('#submit-form').on('click', function() {
         if (checkIfLoggedIn()) {
             postData(JSON.stringify(getData()));
@@ -98,6 +119,10 @@ $(function() {
         }
     });
 
+    /**
+     * Method to send POST request to backend to save data
+     * @param data
+     */
     let postData = function(data) {
         $.ajax({
             "type": 'PUT',

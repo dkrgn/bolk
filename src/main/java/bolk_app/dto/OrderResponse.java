@@ -6,6 +6,9 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
+/**
+ * Class to build an Order response to send to frontend
+ */
 @Data
 @AllArgsConstructor
 public class OrderResponse {

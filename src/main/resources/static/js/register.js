@@ -1,5 +1,8 @@
 $(function() {
 
+    /**
+     * Method to retrieve data from input fields and call other methods
+     */
     $('#register-button').on('click', function() {
         if (checkIfLoggedIn()) {
             let name = $('#name').val();
@@ -21,6 +24,9 @@ $(function() {
         return false;
     });
 
+    /**
+     * Method to navigate to specified page on button click
+     */
     $('#previous-page').on('click', function() {
         if (checkIfLoggedIn()) {
             window.location.href = "http://localhost:8080/";
@@ -30,10 +36,18 @@ $(function() {
         }
     });
 
+    /**
+     * Method to check if token is still valid/user is logged in
+     * @returns {boolean}
+     */
     let checkIfLoggedIn = function() {
         return sessionStorage.getItem("token") !== null;
     }
 
+    /**
+     * Method to send POST request to save new User in database
+     * @param json
+     */
     let register = function(json) {
         $.ajax({
             "type": 'POST',

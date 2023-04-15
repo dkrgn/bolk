@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class responsible to process API requests from /orders-form.html/
+ */
 @RestController
 @RequestMapping("/orders-form.html/")
 @AllArgsConstructor
@@ -20,12 +23,23 @@ public class FormController {
 
     private final FormService formService;
 
+    /**
+     * Method to return Order response object by requested id
+     * @param id of Order from request
+     * @return Order response object
+     */
     @GetMapping("{id}")
     public OrderResponse getOrder(
             @PathVariable("id") String id) {
         return orderService.getResponse(Integer.parseInt(id));
     }
 
+    /**
+     * Method to save a list of Unit objects for specific Order into database by request
+     * @param id of Order object for which Unit object will be saved
+     * @param data: list of Unit objects to save
+     * @return a list of saved Units
+     */
     @PostMapping(value = "save/{id}",
                  produces = MediaType.APPLICATION_JSON_VALUE,
                  consumes = MediaType.APPLICATION_JSON_VALUE)

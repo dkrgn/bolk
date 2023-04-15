@@ -8,6 +8,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * POJO ConfirmationToken object to persist it in database
+ */
 @Getter
 @Setter
 @NoArgsConstructor

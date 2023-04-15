@@ -14,6 +14,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+/**
+ * Service class to process Login requests and give appropriate responses
+ */
 @Service
 @AllArgsConstructor
 public class LoginService {
@@ -21,6 +24,11 @@ public class LoginService {
     private final UserRepo userRepo;
     private final ConfirmationTokenService tokenService;
 
+    /**
+     * Method to check credentials provided by user when trying to log in
+     * @param request from frontend by user with user's data
+     * @return a Login response with token and role if provided data in request is valid
+     */
     public LoginResponse checkCredentials(LoginRequest request) {
         System.err.println(request.toString());
         String email = request.getEmail();

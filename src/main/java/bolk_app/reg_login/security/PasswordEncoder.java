@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Configuration class to hashcode users' passwords
+ */
 @Configuration
 public class PasswordEncoder {
 

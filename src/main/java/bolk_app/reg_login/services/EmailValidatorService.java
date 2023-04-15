@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.function.Predicate;
 
+/**
+ * Service class to check if provided email is valid
+ */
 @Service
 public class EmailValidatorService implements Predicate<String> {
 

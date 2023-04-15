@@ -19,12 +19,21 @@ import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ * Service class to build a JSON file with provided Order and Unit data. It saves it to
+ * src/main/resources/file-outputs/json-order-config/ directory
+ */
 @Service
 @AllArgsConstructor
 public class JSONBuilderService {
 
     private final RecipientRepo recipientRepo;
 
+    /**
+     * Method to build root object and call other methods to build JSON structure
+     * @param order data to be written into the file
+     * @param units data to be written into the file
+     */
     public void build(Order order, List<Unit> units) {
         JSONObject root = new JSONObject();
         reflect(root);
@@ -45,6 +54,12 @@ public class JSONBuilderService {
         };
     }
 
+    /**
+     * Method to change inner field variable of JSONObject class, since JSONObject extends HashMap data type, the order of
+     * elements will be unordered. In order for JSONObject to store elements ordered, it is necessary to change inner
+     * field from HashMap to LinkedHashMap
+     * @param jsonObject for which such change should be made
+     */
     private void reflect(JSONObject jsonObject) {
         try {
             Field changeMap = jsonObject.getClass().getDeclaredField("map");
@@ -56,6 +71,10 @@ public class JSONBuilderService {
         }
     }
 
+    /**
+     * Method to build Message Header element
+     * @param root element
+     */
     private void buildMessageHeader(JSONObject root) {
         JSONObject messageHeader = new JSONObject();
         reflect(messageHeader);
@@ -66,6 +85,12 @@ public class JSONBuilderService {
         root.put("Message_Header", messageHeader);
     }
 
+    /**
+     * Method to build Order elements
+     * @param root element
+     * @param units: list of requested Unit objects
+     * @param o: requested Order object
+     */
     private void buildOrders(JSONObject root, List<Unit> units, Order o) {
         JSONObject order = new JSONObject();
         reflect(order);
@@ -115,6 +140,10 @@ public class JSONBuilderService {
         root.put("Orders", orders);
     }
 
+    /**
+     * Method to build PickupAddress element
+     * @return pickup address element
+     */
     private JSONObject buildPickUpAddress() {
         JSONObject loading = new JSONObject();
         reflect(loading);
@@ -148,6 +177,11 @@ public class JSONBuilderService {
         return pickup;
     }
 
+    /**
+     * Method to build delivery address element
+     * @param orderRecipientId: recipient id
+     * @return delivery address element
+     */
     private JSONObject buildDeliveryAddress(int orderRecipientId) {
         Recipient recipient = recipientRepo.getRecipientByOrderId(orderRecipientId);
         JSONObject unloading = new JSONObject();
@@ -182,6 +216,11 @@ public class JSONBuilderService {
         return delivery;
     }
 
+    /**
+     * Method to build inner Order elements
+     * @param units: list of Unit objects requested
+     * @return array of JSONObjects
+     */
     private JSONArray buildGoodsDetails(List<Unit> units) {
         JSONArray goodsArray = new JSONArray();
         for (Unit u : units) {

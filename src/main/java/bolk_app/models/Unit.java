@@ -7,6 +7,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+/**
+ * POJO Unit object to persist it in database
+ */
 @Setter
 @Getter
 @Entity

@@ -1,5 +1,8 @@
 $(function() {
 
+    /**
+     * Method to call other methods when DOM object is rendered
+     */
     $(document).ready(function() {
         if (checkIfLoggedIn()) {
             $('#login-li').attr("hidden", true);
@@ -15,6 +18,9 @@ $(function() {
         }
     });
 
+    /**
+     * Method to check if token is valid every hour
+     */
     setInterval(function() {
         $.get('/check', {"token" : sessionStorage.getItem("token")}, function(res) {
             if (res === false) {
@@ -28,10 +34,19 @@ $(function() {
         });
     }, 1000 * 60 * 60);
 
+    /**
+     * Method to check if token is still valid/user is logged in
+     * @returns {boolean}
+     */
     let checkIfLoggedIn = function() {
         return sessionStorage.getItem("token") !== null;
     }
 
+    /**
+     * Method to append elements to DOM object with retrieved data from backend
+     * @param response
+     * @returns {*|jQuery|HTMLElement}
+     */
     let getResponseElement = function(response) {
         let tbody = $(".orders");
         tbody.append($("<tr class=\"bg-white border-b dark:bg-gray-900 dark:border-gray-700\"></tr>"));
@@ -48,6 +63,11 @@ $(function() {
         return trow;
     };
 
+    /**
+     * Method to check which tole the user has and  depending on that appends specific elements to DOM object
+     * @param trow
+     * @param response
+     */
     let checkRoles = function(trow, response) {
         //edit
         if (response.status === 'FINISHED' && sessionStorage.getItem("role") === 'EMPLOYEE') {
@@ -67,6 +87,10 @@ $(function() {
         }
     }
 
+    /**
+     * Method to append Order object to DOM elements
+     * @param url
+     */
     let loadOrders = function(url) {
         if (checkIfLoggedIn()) {
             $.get(url, {}, function(response) {
@@ -82,6 +106,10 @@ $(function() {
         }
     }
 
+    /**
+     * Method to retrieve Order by specific id
+     * @param id
+     */
     let loadOrderBySearch = function(id) {
         if (checkIfLoggedIn()) {
             $.get("/search/" + id, {}, function(response) {
@@ -95,15 +123,25 @@ $(function() {
         }
     }
 
+    /**
+     * Method to navigate to specified page on button click
+     */
     $('#register-p').on('click', function() {
         window.location.href = "/register.html";
     });
 
+    /**
+     * Method to navigate to specified page on button click
+     */
     $('#logout-p').on('click', function() {
         sessionStorage.clear();
         window.location.href = "/login.html";
     });
 
+    /**
+     * Method to either navigate to employee's role or admin's role pages. Another method is for admin
+     * to delete Order on button click.
+     */
     $('tbody')
         .on('click', '.edit-button',  function() {
         let stringId = this.id;
@@ -136,23 +174,38 @@ $(function() {
         }
     });
 
+    /**
+     * Method to retrieve Orders
+     */
     $('#all').on('click', function() {
         loadOrders("/all")
     });
 
+    /**
+     * Method to retrieve Orders with pending status
+     */
     $('#pending').on('click', function() {
         loadOrders("/pending")
     });
 
+    /**
+     * Method to retrieve Orders with finished status
+     */
     $('#finished').on('click', function() {
         loadOrders("/finished")
     });
 
+    /**
+     * Method to show requested Order by id
+     */
     $('#search-button').on('click', function() {
         let input = $('#input-placeholder').val();
         loadOrderBySearch(input);
     });
 
+    /**
+     * Method to navigate to specified page on button click
+     */
     $('#login-p').on('click', function() {
         window.location.href = "/login.html";
     });

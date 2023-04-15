@@ -1,5 +1,8 @@
 $(function() {
 
+    /**
+     * Method to get data from inputs and call validate() method
+     */
     $("#login-button").on('click', function() {
         let email = $("#email").val();
         let password = $("#password").val();
@@ -7,6 +10,11 @@ $(function() {
         return false;
     });
 
+    /**
+     * Method to send POST request to backend with gathered data
+     * @param email
+     * @param password
+     */
     let validate = function(email, password) {
         if (email.length > 0 && password > password.length) {
             let req = {'email' : email, 'password' : password};

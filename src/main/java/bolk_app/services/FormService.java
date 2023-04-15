@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service class to process data received from frontend requests
+ */
 @Service
 @AllArgsConstructor
 public class FormService {
@@ -23,6 +26,14 @@ public class FormService {
 
     private final JSONBuilderService jsonBuilderService;
 
+    /**
+     * Method to save new Unit object associated with particular Order object, which saves it into database, and  writes
+     * information about units and orders into the files with XML and JSON data types. The file structure is according to the
+     * provided documentation.
+     * @param id Order object id from request
+     * @param data List of Unit objects from frontend request
+     * @return list of Unit objects
+     */
     public List<Unit> saveUnitAndReturnResults(int id, UnitWrapper data) {
         List<Unit> units = new ArrayList<>();
         for (Unit u : data.getUnits()) {

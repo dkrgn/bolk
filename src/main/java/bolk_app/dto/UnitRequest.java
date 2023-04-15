@@ -2,6 +2,9 @@ package bolk_app.dto;
 
 import lombok.Data;
 
+/**
+ * Class to build a Unit request to get from frontend
+ */
 @Data
 public class UnitRequest {
 

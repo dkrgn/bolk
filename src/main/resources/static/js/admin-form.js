@@ -2,6 +2,9 @@ $(function() {
     let id = localStorage.getItem("id");
     let palletsNr;
 
+    /**
+     * Method to call other method when the DOM object is loaded and rendered
+     */
     $(document).ready(function() {
         if (checkIfLoggedIn()) {
             $.get("/admin-form.html/" + id, {}, function(response) {
@@ -16,10 +19,17 @@ $(function() {
         }
     });
 
+    /**
+     * Method to check if the token is saved into local storage, meaning User is logged in
+     * @returns {boolean}
+     */
     let checkIfLoggedIn = function() {
         return sessionStorage.getItem("token") !== null;
     }
 
+    /**
+     * Method to check if token is valid every hour
+     */
     setInterval(function() {
         $.get('/check', {"token" : sessionStorage.getItem("token")}, function(res) {
             if (res === false) {
@@ -30,7 +40,9 @@ $(function() {
         });
     }, 1000 * 60 * 60);
 
-
+    /**
+     * Method to navigate to the previous page on click
+     */
     $('#previous-page').on('click', function() {
         if (checkIfLoggedIn()) {
             window.location.href = "http://localhost:8080/";
@@ -41,8 +53,12 @@ $(function() {
         }
     });
 
+    /**
+     * Method provides functionality to navigate to edit unit page to edit particular unit, or to delete particular unit
+     * on associated button click
+     */
     $("tbody")
-        .on('click', '.edit-button',  function() {
+        .on('click', '.edit-button', function() {
         if (checkIfLoggedIn()) {
             let stringId = this.id;
             let id = stringId.substring("edit-id-".length);
@@ -78,6 +94,10 @@ $(function() {
             }
     });
 
+    /**
+     * Method to build HTML elements and append them to the DOM element with Order data
+     * @param response
+     */
     let setOrder = function(response) {
         $("#customer-id-div").append("<p id=\"customer-id\" class=\"font-normal text-gray-700 dark:text-gray-400\">" + response.customerName + "</p>");
         $("#order-id-div").append("<p id=\"order-id\" class=\"font-normal text-gray-700 dark:text-gray-400\">" + response.id + "</p>");
@@ -87,6 +107,10 @@ $(function() {
         $("#date-order-div").append("<p id=\"date\" class=\"font-normal text-gray-700 dark:text-gray-400\">" + response.date + "</p>");
     };
 
+    /**
+     * Method to append Unit elements to the DOM element retrieved from backend -> database
+     * @param response
+     */
     let setUnits = function(response) {
         let tbody = $(".units");
         tbody.empty();
@@ -97,6 +121,11 @@ $(function() {
 
     };
 
+    /**
+     * Method to append Unit elements to DOM element to render them on page
+     * @param response
+     * @returns {*|jQuery|HTMLElement}
+     */
     let getResponseElement = function(response) {
         let tbody = $(".units");
         tbody.append($("<tr class=\"bg-white border-b dark:bg-gray-900 dark:border-gray-700\"></tr>"));

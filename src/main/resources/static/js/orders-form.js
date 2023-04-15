@@ -4,6 +4,9 @@ $(function() {
     let submitted = 0;
     let palletsNr;
 
+    /**
+     * Method to call other methods when DOM object is rendered
+     */
     $(document).ready(function() {
         if (checkIfLoggedIn()) {
             validate();
@@ -16,11 +19,18 @@ $(function() {
         }
     });
 
+    /**
+     * Method to check if token is still valid/user is logged in
+     * @returns {boolean}
+     */
     let checkIfLoggedIn = function() {
         return sessionStorage.getItem("token") !== null;
     }
 
 
+    /**
+     * Method to navigate to specified page on button click
+     */
     $('#previous-page').on('click', function() {
         if (checkIfLoggedIn()) {
             window.location.href = "http://localhost:8080/";
@@ -31,6 +41,10 @@ $(function() {
         }
     })
 
+    /**
+     * Method to append DOM elements with response data
+     * @param response
+     */
     let setOrder = function(response) {
         $("#customer-id-div").append("<p id=\"customer-id\" class=\"font-normal text-gray-700 dark:text-gray-400\">" + response.customerName + "</p>");
         $("#order-id-div").append("<p id=\"order-id\" class=\"font-normal text-gray-700 dark:text-gray-400\">" + response.id + "</p>");
@@ -41,6 +55,9 @@ $(function() {
         $("#submitted-div").append("<p id='submitted' class=\"font-normal text-gray-700 dark:text-gray-400\">" + submitted + "/" + palletsNr + "</p>");
     };
 
+    /**
+     * Method to validate saved data in local storage
+     */
     let validate = function() {
         if (localStorage.getItem("submitted") === null) {
             submitted = 0;
@@ -61,6 +78,10 @@ $(function() {
         }
     }
 
+    /**
+     * Retrieve and return data from input tags
+     * @returns {{sealed: (*|jQuery|string), length: (string|*|jQuery), width: (string|*|jQuery), weight: (string|*|jQuery), fragile: (*|jQuery|string), deliveryCompany: (*|jQuery|string), type: (*|jQuery|string), height: (string|*|jQuery)}}
+     */
     let getData = function() {
         const isEmpty = str => !str.trim().length;
         let delivery = $('#shipping').val();
@@ -87,6 +108,9 @@ $(function() {
         };
     }
 
+    /**
+     * Method to save Unit object data and navigate to another Unit
+     */
     $('.next-unit').on('click', function() {
         if (checkIfLoggedIn()) {
             if (submitted <= palletsNr) {
@@ -109,6 +133,9 @@ $(function() {
         }
     })
 
+    /**
+     * Set data to default values
+     */
     let erase = function() {
         let shipping = $('#shipping');
         for (let i = 0; i < shipping.children('option').length; i++) {
@@ -132,6 +159,9 @@ $(function() {
         $("#fragile").checked = false;
     }
 
+    /**
+     * Method to submit Units on button click
+     */
     $('#submit-form').on('click', function() {
         if (checkIfLoggedIn()) {
             let unitsSet = [];
@@ -149,6 +179,10 @@ $(function() {
         }
     });
 
+    /**
+     * Method to send POST request to backend to save data
+     * @param data
+     */
     let postData = function(data) {
         $.ajax({
             "type": 'POST',
