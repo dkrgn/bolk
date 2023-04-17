@@ -30,7 +30,7 @@ The interface works in the following way:
 1. It receives the data from Bolk database and provides the overview of the list of orders
 > **Note:**
 > Unfortunately, Bolk couldn't provide us the access to their database, so for the prototype it was decided to use local database
-2. According to the role (Employee/Admin), the interface would different options to work with data, let's consider depending on a role:
+2. According to the role (Employee/Admin), the interface would have different options to work with data, let's consider depending on a role:
 3. **_Employee_**: this role is dedicated for a warehouse employee, who's primary task is to measure the pallets (length, width, height, etc.), and then save this data to the database. For this purpose we've created a form, where the employee can easily provide all the necessary data for each unit per order, and then simply submit the data.  No other action is provided.
 4. **_Admin_**: this role is dedicated strictly to the management of a warehouse. Admin role is granted the same actions as employee, but admin can also edit the order, edit the saved units of order, delete order, delete units, register new employees.
 > **Note:**
@@ -72,7 +72,7 @@ Open the file and click on a green triangle to run the application.
 The next thing to do is to open any browser of your preferences and enter `localhost:8080` in the search bar. If everything was done correctly, 
 you will be navigated to the login page. As you may have noticed, when running `data.sql`, you didn't save users' information
 into the database. In order to save users' data, there are two ways. For testing purposes, the easiest option is to:
-1. Navigate to `src/main/java/bolk_app/reg_login/services` and find `LoginService.java`. Comment out lines 34-37. To comment out a line
+1. Navigate to `src/main/java/bolk_app/reg_login/services` and find `LoginService.java`. Comment out lines 42-45. To comment out a line
 two slashes should be placed in front of the line.
 >**Should look like this**:
 ```
