@@ -130,6 +130,9 @@ SET role = 'ADMIN'
 WHERE id = ?
 ```
 13. Now you have two emails, for employee and for admin, with their passwords being hashed.
+
+>**Note**:
+> Regarding the css styling. This project uses css framework called Tailwind. In order to use it and have a beautiful styling, follow [this](https://tailwindcss.com/docs/installation) link to check for its documentation and guide of how to install it.
 ### Interface functionality:
 
 As it was said earlier, the application has 2 roles, namely 'Employee' and 'Admin'.

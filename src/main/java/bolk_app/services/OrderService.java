@@ -10,6 +10,9 @@ import bolk_app.repositories.OrderRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -109,6 +112,14 @@ public class OrderService {
     public String deleteOrder(String id) {
         Order order = orderRepo.getOrderById(Integer.parseInt(id));
         orderRepo.delete(order);
+        File xmlFile = new File("src/main/resources/file-outputs/xml-order-config/order-xml-" + id + ".xml");
+        File jsonFile = new File("src/main/resources/file-outputs/json-order-config/order-json-" + id + ".json");
+        try {
+            Files.deleteIfExists(jsonFile.toPath());
+            Files.deleteIfExists(xmlFile.toPath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return id;
     }
 }

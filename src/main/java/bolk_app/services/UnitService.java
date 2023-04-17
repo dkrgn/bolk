@@ -21,6 +21,10 @@ public class UnitService {
 
     private final UnitRepo unitRepo;
 
+    private final XMLBuilderService xmlBuilderService;
+
+    private final JSONBuilderService jsonBuilderService;
+
     /**
      * Method to return list of Unit objects by Order id
      * @param id of Order requested
@@ -45,6 +49,8 @@ public class UnitService {
     public int deleteUnit(int id) {
         Unit unit = unitRepo.getUnitById(id);
         unitRepo.delete(unit);
+        xmlBuilderService.build(unit.getOrder(), unitRepo.getUnitsByOrderId(unit.getOrder().getId()));
+        jsonBuilderService.build(unit.getOrder(), unitRepo.getUnitsByOrderId(unit.getOrder().getId()));
         return id;
     }
 
@@ -65,6 +71,8 @@ public class UnitService {
         u.setSealed(request.isSealed());
         u.setFragile(request.isFragile());
         unitRepo.save(u);
+        xmlBuilderService.build(u.getOrder(), unitRepo.getUnitsByOrderId(u.getOrder().getId()));
+        jsonBuilderService.build(u.getOrder(), unitRepo.getUnitsByOrderId(u.getOrder().getId()));
         return u;
     }
 
